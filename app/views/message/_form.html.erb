@@ -1,0 +1,12 @@
+<%= form_for @post do |f| %>
+
+  <div class="field">
+    <%= f.label "Name" %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Your Message" %><br>
+    <%= f.text_field :message %>
+  </div>
+
+<% end %>
