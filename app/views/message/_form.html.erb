@@ -1,4 +1,4 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, url: message_index_path do |f| %>
 
   <div class="field">
     <%= f.label "Name" %><br>
@@ -7,6 +7,9 @@
   <div class="field">
     <%= f.label "Your Message" %><br>
     <%= f.text_field :message %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 
 <% end %>
