@@ -4,10 +4,15 @@ class MessageController < ApplicationController
 
 	def index
 		@post = Post.new #for the form
+		binding.pry
+		posts = Post.all #for showing posts
+		now = Time.now
+		posts.each do |post|
+			post[:dif] = now - post.created_at
+		end
 
-		@posts = Post.all
+		@posts = posts
 
-		@time = Time.now
 	end
 
 	def create
@@ -17,6 +22,6 @@ class MessageController < ApplicationController
 	end
 
   	def post_params
-      params.require(:post).permit(:name, :message)
+      params.require(:post).permit(:name, :message, :dif)
     end
 end
