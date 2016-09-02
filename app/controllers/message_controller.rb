@@ -4,18 +4,13 @@ class MessageController < ApplicationController
 
 	def index
 		@post = Post.new #for the form
+
+		@posts = time_dif(Post.all)
 		binding.pry
-		posts = Post.all #for showing posts
-		now = Time.now
-		posts.each do |post|
-			post[:dif] = now - post.created_at
-		end
-
-		@posts = posts
-
 	end
 
 	def create
+		binding.pry
 		post = Post.new(post_params)
 		post.save
 		redirect_to root_path
