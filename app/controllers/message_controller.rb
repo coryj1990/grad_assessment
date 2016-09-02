@@ -6,11 +6,9 @@ class MessageController < ApplicationController
 		@post = Post.new #for the form
 
 		@posts = time_dif(Post.all)
-		binding.pry
 	end
 
 	def create
-		binding.pry
 		post = Post.new(post_params)
 		post.save
 		redirect_to root_path
