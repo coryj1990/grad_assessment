@@ -1,4 +1,4 @@
-require 'pry'
+require 'json'
 
 class MessageController < ApplicationController
 
@@ -17,4 +17,15 @@ class MessageController < ApplicationController
   	def post_params
       params.require(:post).permit(:name, :message, :dif)
     end
+
+    def api
+    	posts = Post.all
+    	api = Hash.new
+
+    	posts.each_with_index do |post, index|
+    		api[index] = { name: post[:name], message: post[:message]}
+    	end
+
+    	@api = api.to_json
+    end	
 end
