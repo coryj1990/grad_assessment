@@ -20,12 +20,7 @@ class MessageController < ApplicationController
 
     def api
     	posts = Post.all
-    	api = Hash.new
-
-    	posts.each_with_index do |post, index|
-    		api[index] = { name: post[:name], message: post[:message]}
-    	end
-
-    	@api = api.to_json
+        @api = the_json_func(posts)
     end	
+
 end

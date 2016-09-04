@@ -1,6 +1,18 @@
-require 'pry'
+require 'json'
+
 class Post < ActiveRecord::Base
 
+end
+
+def the_json_func(postsarr)
+	api = Hash.new
+	postsarr = time_dif(postsarr)
+
+	postsarr.each_with_index do |post, index|
+		api[index] = { name: post[:name], message: post[:message], age: post[:dif]}
+	end
+
+	return api.to_json
 end
 
 def time_dif(records_arr)
