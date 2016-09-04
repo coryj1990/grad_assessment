@@ -4,16 +4,24 @@ class Post < ActiveRecord::Base
 
 end
 
+# Takes a Post instance
+#
+# Returns string formatted as JSON
+
 def the_json_func(postsarr)
 	api = Hash.new
 	postsarr = time_dif(postsarr)
 
 	postsarr.each_with_index do |post, index|
-		api[index] = { name: post[:name], message: post[:message], age: post[:dif]}
+		api[index] = { name: post[:name], message: post[:message], age: time_desc(post[:dif])}
 	end
 
 	return api.to_json
 end
+
+# Compares the created_at fields for Post instance
+#
+# Returns number of seconds that has past since it post
 
 def time_dif(records_arr)
 	present = Time.now
@@ -29,6 +37,10 @@ def time_dif(records_arr)
 
 end
 
+# Takes a number of seconds
+#
+# Returns summary of approximately how much time has past.
+
 def time_desc(num)
 	min = num/60
 	hour = num/3600
@@ -41,6 +53,15 @@ def time_desc(num)
 		str = (num/86400/365).to_s + " years"
 	end
 
+	if day >= 30 and day < 365
+		months = day/30
+		if months == 1
+			str = "About a month"
+		else
+			str = months.to_s + " months"
+		end
+	end
+
 	if day > 0 and day < 30
 		if day == 1
 			str = day.to_s + " day"
@@ -51,7 +72,7 @@ def time_desc(num)
 
 	if hour > 0 and hour < 24
 		if hour == 1
-			str = " an hour"
+			str = "An hour"
 		else
 			str = hour.to_s + " hours"
 		end
@@ -59,7 +80,7 @@ def time_desc(num)
 
 	if min > 0 and min < 60
 		if min == 1
-			str = " a minute"
+			str = "A minute"
 		else 
 			str = min.to_s + " minutes"
 		end
